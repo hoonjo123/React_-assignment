@@ -1,18 +1,25 @@
-import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
-import { UserContext } from "../App";
+import React, { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { UserContext } from '../App';
 
 function ProfilePage() {
   const { userId } = useParams();
   const { user } = useContext(UserContext);
 
+  useEffect(() => {
+    console.log('ProfilePage User:', user);
+  }, [user]);
+
   return (
     <div>
-      <h1>Profile Page</h1>
+      <h1>프로필페이지</h1>
       {user ? (
-        <p>Viewing profile of user ID: {userId}</p>
+        <>
+          <p>유저아이디: {userId}</p>
+          <p>현재 사용자: {JSON.stringify(user)}</p>
+        </>
       ) : (
-        <p>Please log in to view profiles.</p>
+        <p>로그인해주세요.</p>
       )}
     </div>
   );
